@@ -94,9 +94,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ValuesController.cs" />
+    <Compile Include="CacheController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

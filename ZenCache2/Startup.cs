@@ -12,8 +12,8 @@ namespace ZenCache2
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "{controller}/{key}/{value}",
+                defaults: new { key = RouteParameter.Optional, value = RouteParameter.Optional }
             );
 
             appBuilder.UseWebApi(config);

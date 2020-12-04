@@ -1,0 +1,6 @@
+.vs
+.nuget
+packages/
+OwinSelfhostSample/obj
+OwinSelfhostSample/bin
+

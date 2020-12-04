@@ -1,7 +1,7 @@
 ﻿using Owin;
 using System.Web.Http;
 
-namespace OwinSelfhostSample
+namespace ZenCache2
 {
     public class Startup
     {

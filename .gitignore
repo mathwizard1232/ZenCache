@@ -1,6 +1,6 @@
 .vs
 .nuget
 packages/
-OwinSelfhostSample/obj
-OwinSelfhostSample/bin
+ZenCache2/obj
+ZenCache2/bin
 

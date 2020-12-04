@@ -2,10 +2,11 @@
 using System.Net.Http;
 using Microsoft.Owin.Hosting;
 
-namespace OwinSelfhostSample
+namespace ZenCache2
 {
     public class Program
     {
+        // The skeleton for this project comes from a Microsoft example for C# self-hosted API at https://github.com/aspnet/samples/tree/master/samples/aspnet/WebApi/OwinSelfhostSample
         static void Main()
         {
             string baseAddress = "http://localhost:10281/";

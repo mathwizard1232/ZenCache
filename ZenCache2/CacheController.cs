@@ -37,12 +37,14 @@ namespace ZenCache2
         // PUT cache
         public void Put(string key, string value)
         {
+            Console.WriteLine("Setting key: " + key + " to value: " + value);
             cache.Add(key, value);
         }
 
         // DELETE cache
         public void Delete(string key)
         {
+            Console.WriteLine("Removing key: " + key);
             cache.Delete(key);
         }
     }

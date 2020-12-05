@@ -1,3 +1,5 @@
+## ZenCache
+
 This is a basic self-hosted concurrent cache for a coding interview.
 
 The application will run at localhost:9000/cache.
@@ -33,6 +35,21 @@ The code always keep an item in cache for at least that many minutes.
 After that many minutes, the code may remove the items from the cache at any time, but is not guaranteed to do so.
 
 If items are being frequently added to the cache, items will typically be removed from the cache between *minutesToHold* and 2\**minutesToHold* minutes.
+
+---
+
+This code was written in Microsoft Visual Studio Community 2017.
+
+In order to run this code, any version of Microsoft Visual Studio should work. Open the .sln file in the IDE.
+
+The first time, the IDE needs to be told explicitly to "restore" the Nuget packages to pull in the dependencies. Right click in the "Solution Explorer",
+ select "Manage NuGet Packages", and click "Restore" in the top-right of the window that opens.
+ 
+After you have done this, you should be able to build and run the program like normal with the green "start" button or pressing "F5". When run, the program
+ will open a blank console window and run the server. You can use the server as described above. Console output will display as keys are set, fetched, or deleted.
+ It will also display a message when the contents are swapped (part of the automatic cache expiration process).
+ 
+When you are done running the program, press "enter" in the console window and it will stop running.
 
 ---
 

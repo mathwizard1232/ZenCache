@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 
 namespace ZenCache2
@@ -14,9 +15,12 @@ namespace ZenCache2
         static Cache cache = new Cache();
 
         // GET cache
-        public string Get()
+        public HttpResponseMessage Get()
         {
-            return cache.FetchAll();
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(cache.FetchAll(), Encoding.UTF8, "text/html")
+            };
         }
 
         // GET cache

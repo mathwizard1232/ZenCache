@@ -27,6 +27,32 @@ namespace ZenCache2
             lastSwap = DateTime.Now;
         }
 
+        // Quick-and-dirty HTML output of the whole contents, showing current contents and old contents.
+        // Basically an internal view for convenience while debugging or playing around with it.
+        public string FetchAll()
+        {
+            string result = "<html><body>";
+
+            result += "<h2>Cache contents in current area:</h2><ul>";
+            foreach (var element in contents)
+            {
+                result += "<li><strong>Key:</strong> " + element.Key + " <strong>Value:</strong> " + element.Value;
+            }
+
+            if (oldContents != null)
+            {
+                result += "</ul><h2>Cache contents in oldContents:</h2><ul>";
+
+                foreach (var element in oldContents)
+                {
+                    result += "<li><strong>Key:</strong> " + element.Key + " <strong>Value:</strong> " + element.Value;
+                }
+            }
+
+            result += "</ul></body></html>";
+            return result;
+        }
+
         // Look at the current time and the last swap time and determine if we need to swap the contents and if so do it if no other thread has
         private void checkSwap()
         {

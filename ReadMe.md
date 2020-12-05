@@ -22,6 +22,10 @@ In order to delete a key, do a DELETE with the key appended to route, like:
 
     curl -s -X DELETE localhost:9000/cache/key
 
+There's a broken view of the whole cache contents available with a GET directly on localhost:9000/cache ; OWIN returns this as XML but it is actually HTML, so it doesn't
+display correctly (since the browser is told explicitly this is just an XML string and so doesn't parse the HTML document inside it. I should fix this later, but it works
+as a kludgy view for now.
+
 ---
 
 ## Automatic cache expiration

@@ -14,10 +14,9 @@ namespace ZenCache2
         static Cache cache = new Cache();
 
         // GET cache
-        // modify this to return all values
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            return cache.FetchAll();
         }
 
         // GET cache

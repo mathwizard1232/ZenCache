@@ -18,7 +18,7 @@ namespace ZenCache2
         private readonly object swapLock = new object();
 
         // Minimum length of time to hold an item in cache
-        private int minutesToHold = 2;
+        private int minutesToHold = 5;
 
         public Cache()
         {

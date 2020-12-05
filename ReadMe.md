@@ -22,6 +22,20 @@ In order to delete a key, do a DELETE with the key appended to route, like:
 
 ---
 
+## Automatic cache expiration
+
+The code has a given minimum number of minutes which it will keep an item in cache. This can be configured at compile time.
+
+It is located in the Cache.cs file and is the field "minutesToHold".
+
+The code always keep an item in cache for at least that many minutes.
+
+After that many minutes, the code may remove the items from the cache at any time, but is not guaranteed to do so.
+
+If items are being frequently added to the cache, items will typically be removed from the cache between *minutesToHold* and 2\**minutesToHold* minutes.
+
+---
+
 This project is based on a skeleton for an OWIN self-hosted Web API provided by Microsoft:
 https://github.com/aspnet/samples/tree/master/samples/aspnet/WebApi/OwinSelfhostSample
 

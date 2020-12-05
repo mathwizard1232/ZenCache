@@ -1,30 +1,65 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 
 namespace ZenCache2
 {
     class Cache
     {
-        ConcurrentDictionary<string, string> contents;
+        // This is the storage for the most recent contents of the cache
+        private ConcurrentDictionary<string, string> contents;
+
+        // We use this to store the contents already in the cache while waiting for them to expire
+        private ConcurrentDictionary<string, string> oldContents;
+
+        // We use this to determine when we last moved the cache to oldCache (and removed prior oldCache)
+        private DateTime lastSwap;
+
+        // We use this lock to ensure that only a single thread swaps the cache
+        private readonly object swapLock = new object();
+
+        // Minimum length of time to hold an item in cache
+        private int minutesToHold = 2;
 
         public Cache()
         {
             contents = new ConcurrentDictionary<string, string>();
+            oldContents = null;
+            lastSwap = DateTime.Now;
+        }
+
+        // Look at the current time and the last swap time and determine if we need to swap the contents and if so do it if no other thread has
+        private void checkSwap()
+        {
+            if (DateTime.Now.Subtract(lastSwap).TotalMinutes > minutesToHold)
+            {
+                lock (swapLock)
+                {
+                    Console.WriteLine("swapping contents");
+                    oldContents = contents;
+                    contents = new ConcurrentDictionary<string, string>();
+                    lastSwap = DateTime.Now;
+                }
+            }
         }
 
         // Add an item to cache if not already there; overwrite it if already there
         public void Add(string key, string value)
         {
             contents[key] = value;
+            checkSwap();
         }
 
         // Retrieve item from cache if present; return empty string if not.
         public string Fetch(string key)
         {
+            // If contents has the key, it will always be newer. If not, if oldContents has it, use that value.
             if (contents.ContainsKey(key))
             {
                 return contents[key];
             }
-            else
+            else if (oldContents.ContainsKey(key)) {
+                return oldContents[key];
+            }
             {
                 return "";
             }
@@ -35,6 +70,7 @@ namespace ZenCache2
         {
             // TryRemove returns the old value in an out parameter, so although we don't use it, need to provide it
             contents.TryRemove(key, out string oldValue);
+            oldContents.TryRemove(key, out oldValue);
         }
     }
 }
